@@ -7,6 +7,7 @@ import './styles/styles.scss'
 import 'normalize.css/normalize.css'
 import 'react-dates/lib/css/_datepicker.css'
 import { firebase } from './firebase/firebase'
+import { startSetSurveys } from './actions/surveys'
 
 const store = configureStore();
 
@@ -15,8 +16,6 @@ const jsx = (
     <AppRouter />
   </Provider>
 )
-
-
 
 console.log(store.getState())
 
@@ -29,5 +28,6 @@ firebase.auth().onAuthStateChanged( (user) => {
   }
 })
 
-
-ReactDOM.render(jsx, document.getElementById('app'))
+store.dispatch(startSetSurveys()).then( () => {
+  ReactDOM.render(jsx, document.getElementById('app'))
+});

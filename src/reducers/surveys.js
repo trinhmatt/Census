@@ -5,7 +5,7 @@ const surveysReducer = (state = surveysDefaultState, action) => {
     case 'CREATE_SURVEY':
       return [
         ...state,
-        action.post
+        action.survey
       ]
     case 'EDIT_SURVEY':
       return state.map((post) => {
