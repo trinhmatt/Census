@@ -42,7 +42,8 @@ class CreateSurvey extends React.Component {
     e.preventDefault();
     const survey = {
       title: this.state.title,
-      questions: this.state.questions
+      questions: this.state.questions,
+      completedSurveys: []
     }
     this.state.dispatch(startCreateSurvey(survey))
     this.state.history.push('/')

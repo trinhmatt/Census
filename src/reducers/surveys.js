@@ -22,6 +22,17 @@ const surveysReducer = (state = surveysDefaultState, action) => {
       return state.filter((post) => {
         return action.id !== post.id
       })
+    case 'SUBMIT_SURVEY':
+      return state.map( (survey) => {
+        if (survey.id === action.id) {
+          return {
+            ...survey,
+            completedSurveys: [...survey.completedSurveys, action.recordedAnswers]
+          }
+        } else {
+          return survey
+        }
+      })
     case 'SET_SURVEYS':
       return action.surveys
     default:

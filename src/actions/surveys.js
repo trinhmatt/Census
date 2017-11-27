@@ -10,10 +10,11 @@ export const startCreateSurvey = (surveyData = {}) => {
   return (dispatch) => {
     const {
       title = '',
-      questions = []
+      questions = [],
+      completedSurveys = []
     } = surveyData
 
-    const survey = { title, questions }
+    const survey = { title, questions, completedSurveys }
 
     return database.ref('surveys').push(survey).then( (ref) => {
       dispatch(createSurvey({
@@ -21,6 +22,22 @@ export const startCreateSurvey = (surveyData = {}) => {
         ...survey
       }))
     })
+  }
+}
+
+export const submitSurvey = (recordedAnswers, id) => ({
+  type: 'SUBMIT_SURVEY',
+  recordedAnswers,
+  id
+})
+
+export const startSubmitSurvey = (recordedAnswers = {}, id = '') => {
+  return (dispatch) => {
+    return database.ref(`surveys/${id}/completedSurveys`).push(recordedAnswers).then(
+      () => {
+        dispatch(submitSurvey(recordedAnswers, id))
+      }
+    )
   }
 }
 
