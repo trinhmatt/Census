@@ -4,7 +4,7 @@ import SurveyList from './SurveyList'
 const Dashboard = () => (
   <div>
     <h1>Dashboard</h1>
-    <SurveyList />
+    <SurveyList onPage={'dashboard'}/>
   </div>
 )
 

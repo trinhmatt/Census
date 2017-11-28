@@ -1,23 +1,33 @@
 import React from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import createHistory from 'history/createBrowserHistory'
+import { Router, Route, Switch } from 'react-router-dom'
 import Dashboard from '../components/Dashboard'
 import Header from '../components/Header'
 import Register from '../components/Register'
 import CreateSurvey from '../components/CreateSurvey'
 import SurveyPage from '../components/SurveyPage'
+import Login from '../components/LoginPage'
+import PrivateRoute from './PrivateRoute'
+import PublicRoute from './PublicRoute'
+import AllUserSurveys from '../components/AllUserSurveys'
+import CompletedSurvey from '../components/CompletedSurveyPage'
+
+export const history = createHistory();
 
 const AppRouter = () => (
-  <BrowserRouter>
+  <Router history={history}>
     <div>
-      <Header />
       <Switch>
-        <Route path='/' component={Dashboard} exact={true}/>
+        <Route path='/' component={Login} exact={true} />
+        <PublicRoute path='/dashboard' component={Dashboard} />
         <Route path='/register' component={Register} />
-        <Route path='/create' component={CreateSurvey} />
-        <Route path='/survey/:id' component={SurveyPage} />
+        <PrivateRoute path='/create' component={CreateSurvey} />
+        <PublicRoute path='/survey/:id' component={SurveyPage} exact={true} />
+        <PrivateRoute path='/surveys/:uid' component={AllUserSurveys} />
+        <PublicRoute path='/survey/:id/complete' component={CompletedSurvey} />
       </Switch>
     </div>
-  </BrowserRouter>
+  </Router>
 )
 
 export default AppRouter;

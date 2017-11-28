@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { startDeleteSurvey } from '../actions/surveys'
 import { startSubmitSurvey } from '../actions/surveys'
 import SurveyQuestion from './SurveyQuestion'
 
@@ -11,18 +12,28 @@ class SurveyPage extends React.Component {
       survey: props.surveys[0],
       recordedAnswers: {},
       dispatch: props.dispatch,
-      history: props.history
+      history: props.history,
+      auth: props.auth
     }
   }
   submitAnswers = () => {
     const completedSurvey = this.state.recordedAnswers
     this.state.dispatch(startSubmitSurvey(completedSurvey, this.state.survey.id))
-    this.state.history.push('/')
+    this.state.history.push(`/survey/${this.state.survey.id}/complete`)
+  }
+  deleteSurvey = () => {
+    this.state.dispatch(startDeleteSurvey(this.state.survey.id))
+    this.state.history.push('/dashboard')
   }
   render() {
     return (
       <div>
         <h1>{this.state.survey.title}</h1>
+        {(this.state.auth.uid === this.state.survey.author)
+          ?
+          <button onClick={this.deleteSurvey}>Delete survey</button>
+          : ''
+        }
         {this.state.survey.questions.map( (question) => {
           return (
             <SurveyQuestion
@@ -51,7 +62,8 @@ class SurveyPage extends React.Component {
 const mapStateToProps = (state, props) => ({
   surveys: state.surveys.filter( (survey) => {
     return survey.id === props.match.params.id
-  })
+  }),
+  auth: state.auth
 })
 
 export default connect(mapStateToProps)(SurveyPage);

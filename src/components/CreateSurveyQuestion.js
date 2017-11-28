@@ -69,9 +69,12 @@ export default class CreateSurveyQuestion extends React.Component {
             onChange={this.onQuestionChange}
             disabled={this.state.disabled}
           />
-          <button onClick={() => {
-            this.setState(() => ({disabled: true}))
-          }}>Save question</button>
+          <button
+            onClick={() => {
+              this.setState(() => ({disabled: true}))
+            }}
+            disabled={(this.state.answers.length === 0)}
+          >Save question</button>
         </form>
         <button
           onClick={ () => {

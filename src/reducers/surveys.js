@@ -18,9 +18,9 @@ const surveysReducer = (state = surveysDefaultState, action) => {
           return post
         }
       })
-    case 'REMOVE_SURVEY':
-      return state.filter((post) => {
-        return action.id !== post.id
+    case 'DELETE_SURVEY':
+      return state.filter((survey) => {
+        return action.id !== survey.id
       })
     case 'SUBMIT_SURVEY':
       return state.map( (survey) => {

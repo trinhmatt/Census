@@ -46,7 +46,7 @@ class CreateSurvey extends React.Component {
       completedSurveys: []
     }
     this.state.dispatch(startCreateSurvey(survey))
-    this.state.history.push('/')
+    this.state.history.push('/dashboard')
   }
   render() {
     return (
@@ -67,4 +67,8 @@ class CreateSurvey extends React.Component {
   }
 }
 
-export default connect()(CreateSurvey);
+const mapStateToProps = (state) => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps)(CreateSurvey);
