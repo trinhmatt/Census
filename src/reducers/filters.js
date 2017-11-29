@@ -2,7 +2,7 @@ import moment from 'moment'
 
 const filtersReducerDefaultState = {
   text: '',
-  sortBy: 'date'
+  author: ''
 };
 
 const filtersReducer = (state = filtersReducerDefaultState, action) => {
@@ -12,11 +12,11 @@ const filtersReducer = (state = filtersReducerDefaultState, action) => {
         ...state,
         text: action.text
       };
-    case 'SORT_BY_DATE':
+    case 'FILTER_BY_AUTHOR':
       return {
         ...state,
-        sortBy: 'date'
-      };
+        author: action.id
+      }
     default:
       return state;
   }

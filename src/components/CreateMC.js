@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class CreateSurveyQuestion extends React.Component {
+export default class CreateMC extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -71,7 +71,7 @@ export default class CreateSurveyQuestion extends React.Component {
           />
           <button
             onClick={() => {
-              //So users can save or edit the question/answers 
+              //So users can save or edit the question/answers
               if (this.state.disabled) {
                 this.setState(() => ({disabled: false}))
               } else {

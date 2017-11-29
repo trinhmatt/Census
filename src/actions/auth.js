@@ -9,10 +9,6 @@ export const logIn = (uid) => ({
 export const startLogin = (email, password) => {
   return (dispatch) => {
     firebase.auth().signInWithEmailAndPassword(email, password)
-      // .then( () => {
-      //   const currentUser = firebase.auth().currentUser.uid
-      //   dispatch(logIn(currentUser))
-      // })
       .catch( (error) => {
         console.log(error.code, error.message)
       })

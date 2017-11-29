@@ -18,7 +18,7 @@ const jsx = (
   </Provider>
 );
 
-//For user auth, to make ensure correct route behaviour
+//For user auth, to ensure correct route behaviour
 let hasRendered = false;
 
 const renderApp = () => {
@@ -37,6 +37,8 @@ console.log(store.getState())
 firebase.auth().onAuthStateChanged( (user) => {
   if (user) {
     store.dispatch(startSetSurveys()).then( () => {
+      //Don't know why I can't dispatch logIn in the actions
+      //Users cannot go anywhere without this line
       store.dispatch(logIn(user.uid))
       renderApp();
       if (history.location.pathname === '/') {

@@ -26,6 +26,7 @@ class SurveyQuestion extends React.Component {
       <div>
         <p>{this.state.question}</p>
         <form onSubmit={this.onSubmit}>
+          {/* Button needed to submit answer data */}
           <button style={{display:'none'}}>Submit answer</button>
           {this.state.answers.map( (answer) => {
             return (

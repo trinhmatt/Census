@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import getVisibleSurveys from '../selectors/surveys'
 
 const SurveyList = (props) => (
   <div>
@@ -11,15 +12,12 @@ const SurveyList = (props) => (
 )
 
 const mapStateToProps = (state, props) => ({
-  //If on the MySurveys route, filter by author
-  //Else, return all surveys
-  surveys: state.surveys.filter( (survey) => {
-    if (props.onPage === 'dashboard') {
-      return true
-    } else {
-      return (state.auth.uid === survey.author)
-    }
-  })
+  surveys: getVisibleSurveys(
+    state.surveys,
+    (props.onPage === 'dashboard'
+    ? state.filters
+    : {...state.filters, author: state.auth.uid}
+  ))
 })
 
 export default connect(mapStateToProps)(SurveyList)
