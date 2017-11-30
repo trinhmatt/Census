@@ -30,10 +30,6 @@ const renderApp = () => {
   }
 };
 
-
-console.log(store.getState())
-
-
 firebase.auth().onAuthStateChanged( (user) => {
   if (user) {
     store.dispatch(startSetSurveys()).then( () => {

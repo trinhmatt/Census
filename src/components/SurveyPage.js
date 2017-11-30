@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { startDeleteSurvey } from '../actions/surveys'
 import { startSubmitSurvey } from '../actions/surveys'
 import SurveyQuestion from './SurveyQuestion'
+import SurveyUAQuestion from './SurveyUAQuestion'
 
 class SurveyPage extends React.Component {
   constructor(props) {
@@ -35,22 +36,43 @@ class SurveyPage extends React.Component {
           : ''
         }
         {this.state.survey.questions.map( (question) => {
-          return (
-            <SurveyQuestion
-              key={question.question}
-              question={question}
-              onSubmit={(questionData) => {
-                this.setState( (prevState) => {
-                  return {
-                    recordedAnswers: {
-                      ...prevState.recordedAnswers,
-                      [questionData.question]: questionData.selectedAnswer
+          if (question.type === 'SA' || question.type === 'MA') {
+            return (
+              <SurveyQuestion
+                key={question.question}
+                question={question}
+                type={question.type}
+                onSubmit={(questionData) => {
+                  this.setState( (prevState) => {
+                    return {
+                      recordedAnswers: {
+                        ...prevState.recordedAnswers,
+                        [questionData.question]: questionData.selectedAnswer
+                      }
                     }
-                  }
-                })
-              }}
-            />
-          )
+                  })
+                }}
+              />
+            )
+          } else {
+            return (
+              <SurveyUAQuestion
+                key={question.question}
+                question={question}
+                onSubmit={(questionData) => {
+                  this.setState( (prevState) => {
+                    return {
+                      recordedAnswers: {
+                        ...prevState.recordedAnswers,
+                        [questionData.question]: questionData.answer
+                      }
+                    }
+                  })
+                }}
+              />
+            )
+          }
+
         })}
         <br />
         <button onClick={this.submitAnswers}>Submit answers</button>

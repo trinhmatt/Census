@@ -8,7 +8,8 @@ export default class CreateMC extends React.Component {
       answers: [],
       nAnswers: 0,
       error: '',
-      disabled: false
+      disabled: false,
+      type: props.type
     }
   }
   onQuestionChange = (e) => {
@@ -46,22 +47,25 @@ export default class CreateMC extends React.Component {
     }
     return answers
   }
-  saveQuestion = (e) => {
+  onSubmit = (e) => {
     e.preventDefault();
+    console.log('fired')
     if (this.state.answers.length === 0) {
       this.setState(() => ({error: 'Please add at least one answer'}))
     } else {
-      this.setState( () => ({error: ''}) )
+      this.setState( () => ({error: '', disabled: true}) )
       this.props.onSubmit({
         question: this.state.question,
-        answers: this.state.answers
+        answers: this.state.answers,
+        type: this.state.type
       })
     }
   }
   render() {
     return (
       <div>
-        <form onSubmit={this.saveQuestion}>
+        {this.state.error}
+        <form onSubmit={this.onSubmit}>
           <input
             type='text'
             placeholder='question'
@@ -70,16 +74,8 @@ export default class CreateMC extends React.Component {
             disabled={this.state.disabled}
           />
           <button
-            onClick={() => {
-              //So users can save or edit the question/answers
-              if (this.state.disabled) {
-                this.setState(() => ({disabled: false}))
-              } else {
-                this.setState(() => ({disabled: true}))
-              }
-            }}
-            disabled={(this.state.answers.length === 0)}
-          >{this.state.disabled ? 'Edit question' : 'Save Question'}</button>
+            disabled={this.state.disabled}
+          >Save Question</button>
         </form>
         <button
           onClick={ () => {
