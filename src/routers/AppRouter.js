@@ -11,6 +11,7 @@ import PrivateRoute from './PrivateRoute'
 import PublicRoute from './PublicRoute'
 import AllUserSurveys from '../components/AllUserSurveys'
 import CompletedSurvey from '../components/CompletedSurveyPage'
+import SurveyResults from '../components/SurveyResults'
 
 export const history = createHistory();
 
@@ -23,6 +24,7 @@ const AppRouter = () => (
         <Route path='/register' component={Register} />
         <PrivateRoute path='/create' component={CreateSurvey} />
         <PublicRoute path='/survey/:id' component={SurveyPage} exact={true} />
+        <PrivateRoute path='/survey/:id/results' component={SurveyResults} />
         <PrivateRoute path='/surveys/:uid' component={AllUserSurveys} />
         <PublicRoute path='/survey/:id/complete' component={CompletedSurvey} />
       </Switch>

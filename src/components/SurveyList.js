@@ -3,14 +3,18 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import getVisibleSurveys from '../selectors/surveys'
 
+//Conditional rendering based on which component requires a list
 const SurveyList = (props) => (
   <div>
-    {props.surveys.map( (survey) => {
+    {(props.onPage === 'dashboard') ? (props.surveys.map( (survey) => {
       return <Link key={survey.id} to={`/survey/${survey.id}`}>{survey.title}</Link>
-    })}
+    })) : (props.surveys.map( (survey) => {
+      return <Link key={survey.id} to={`/survey/${survey.id}/results`}>{survey.title}</Link>
+    }))}
   </div>
 )
 
+//Map state based on which component is rendering the list 
 const mapStateToProps = (state, props) => ({
   surveys: getVisibleSurveys(
     state.surveys,

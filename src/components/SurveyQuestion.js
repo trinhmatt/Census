@@ -20,8 +20,9 @@ class SurveyQuestion extends React.Component {
       this.setState( (prevState) => ({
         selectedAnswers: prevState.selectedAnswers.filter( (answer) => {
           return answer !== selectedAnswer
-        })
-      }))
+        })}),
+      this.simulateClick.bind(this,e)
+      )
     } else {
       this.setState((prevState) => (
         {selectedAnswers: [...prevState.selectedAnswers, selectedAnswer]}),
@@ -51,7 +52,7 @@ class SurveyQuestion extends React.Component {
             } else {
               return (
                 <div key={answer}>
-                  <input type='checkbox' value={answer} name='answer' onFocus={this.onAnswerSelect}/>
+                  <input type='checkbox' value={answer} name='answer' onClick={this.onAnswerSelect}/>
                   <label>{answer}</label>
                 </div>
               )

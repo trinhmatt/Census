@@ -15,7 +15,8 @@ class CreateSurvey extends React.Component {
       dispatch: props.dispatch,
       history: props.history,
       questionType: 'SA',  //Needed in case the user doesn't change the question type
-      typesToRender: []
+      typesToRender: [],
+      nQuestions: 0
     }
   }
   onTitleChange = (e) => {
@@ -41,22 +42,50 @@ class CreateSurvey extends React.Component {
     switch (this.state.questionType) {
       case 'SA': //SA = SINGLE ANSWER
         return this.setState( (prevState) => ({
-          typesToRender: [...prevState.typesToRender, <CreateMC key={uuid()} type={'SA'} onSubmit={this.onQuestionSave}/>]
+          typesToRender: [
+            ...prevState.typesToRender,
+            <CreateMC id={this.state.nQuestions} key={uuid()} type={'SA'} onSubmit={this.onQuestionSave}/>
+          ],
+          nQuestions: prevState.nQuestions + 1,
+          questions: [...prevState.questions, {}]
         }))
       case 'MA': //MA = MULTIPLE ANSWERS
         return this.setState( (prevState) => ({
-          typesToRender: [...prevState.typesToRender, <CreateMC key={uuid()} type={'MA'} onSubmit={this.onQuestionSave}/>]
+          typesToRender: [
+            ...prevState.typesToRender,
+            <CreateMC id={this.state.nQuestions} key={uuid()} type={'MA'} onSubmit={this.onQuestionSave}/>
+          ],
+          nQuestions: prevState.nQuestions + 1,
+          questions: [...prevState.questions, {}]
         }))
       case 'UA': //UA = USER PROVIDED ANSWER
         return this.setState( (prevState) => ({
-          typesToRender: [...prevState.typesToRender, <CreateUA key={uuid()} onSubmit={this.onQuestionSave}/>]
+          typesToRender: [
+            ...prevState.typesToRender,
+            <CreateUA id={this.state.nQuestions} key={uuid()} type={'UA'} onSubmit={this.onQuestionSave}/>
+          ],
+          nQuestions: prevState.nQuestions + 1,
+          questions: [...prevState.questions, {}]
+        }))
+      case 'RA': //RA = Answer from a scale
+        return this.setState( (prevState) => ({
+          typesToRender: [
+            ...prevState.typesToRender,
+            <CreateUA id={this.state.nQuestions} key={uuid()} type={'RA'} onSubmit={this.onQuestionSave}/>
+          ],
+          nQuestions: prevState.nQuestions + 1,
+          questions: [...prevState.questions, {}]
         }))
     }
   }
   onQuestionSave = (question) => {
-    this.setState( (prevState) => ({
-      questions: [...prevState.questions, question]
-    }))
+    this.setState( (prevState) => {
+      const questionIndex = question.id;
+      let prevQuestions = prevState.questions;
+      prevQuestions[questionIndex] = {...question};
+
+      return {questions: prevQuestions}
+    })
   }
   render() {
     return (
@@ -72,6 +101,7 @@ class CreateSurvey extends React.Component {
             <option value='SA'>Single answer</option>
             <option value='MA'>Multiple answers</option>
             <option value='UA'>User answer</option>
+            <option value='RA'>Range answer</option>
           </select>
           <button>Add</button>
         </form>
