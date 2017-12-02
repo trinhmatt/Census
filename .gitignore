@@ -1,4 +1,4 @@
 node_modules/
 public/bundle.js
-public/stlyes.css
+public/styles.css
 .env.development
