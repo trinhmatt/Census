@@ -1,13 +1,16 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
-export default class UserForm extends React.Component {
+class UserForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       username: '',
       email: '',
       password: '',
-      error: ''
+      error: '',
+      history: props.history
     }
   }
   onEmailChange = (e) => {
@@ -38,28 +41,30 @@ export default class UserForm extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.onSubmit}>
+        <form className='user-form' onSubmit={this.onSubmit}>
           <input
             type='text'
             placeholder='email'
             value={this.state.email}
             onChange={this.onEmailChange}
           />
-          <input
+          {this.state.history.location.pathname === '/' ? '' : <input
             type='text'
             placeholder='username'
             value={this.state.username}
             onChange={this.onUsernameChange}
-          />
+          />}
           <input
             type='password'
             placeholder='password'
             value={this.state.password}
             onChange={this.onPasswordChange}
           />
-          <button>Submit</button>
+          <button>{this.state.history.location.pathname === '/' ? 'Log In' : 'Register'}</button>
         </form>
       </div>
     )
   }
 }
+
+export default withRouter(UserForm)

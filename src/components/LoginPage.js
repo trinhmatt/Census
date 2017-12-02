@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { startLogin } from '../actions/auth'
+import UserForm from './UserForm'
 
 class Login extends React.Component {
   constructor(props) {
@@ -10,7 +11,8 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
-      startLogin: props.startLogin
+      startLogin: props.startLogin,
+      history: props.history
     }
   }
   onEmailChange = (e) => {
@@ -21,32 +23,26 @@ class Login extends React.Component {
     const password = e.target.value;
     this.setState( () => ({password}))
   }
-  onLoginSubmit = (e) => {
-    e.preventDefault();
-    const email = this.state.email
-    const password = this.state.password
-    this.state.startLogin(email, password)
-  }
   render() {
     return (
-      <div>
-        <h1>Log In</h1>
-        <Link to='/register'>Register</Link>
-        <form onSubmit={this.onLoginSubmit}>
-          <input
-            type='text'
-            value={this.state.email}
-            onChange={this.onEmailChange}
-            placeholder='email'
-          />
-          <input
-            type='password'
-            value={this.state.password}
-            onChange={this.onPasswordChange}
-            placeholder='password'
-          />
-          <button>Log in</button>
-        </form>
+      <div className='login-page'>
+        <div id='landing-header'>
+          <h2>CensUS</h2>
+          <p>Participate or record information for a better world.</p>
+          <Link className='register-link' to='/register'>Register</Link>
+          <UserForm onSubmit={(user) => {
+            const email = user.email
+            const password = user.password
+            this.state.startLogin(email, password)
+          }}/>
+        </div>
+        <ul className="slideshow">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
       </div>
     )
   }

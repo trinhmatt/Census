@@ -1,11 +1,20 @@
 html {
   font-size: 62.5%;
+  margin: 0;
+  height: 100%;
+  width: 100%;
 }
 
 body {
   font-family: Arial, sans-serif;
   background-color: white;
   font-size: $m-size;
+  margin: 0;
+  height: 100%;
+}
+
+body h1 {
+  margin: 0
 }
 
 button {
