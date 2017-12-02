@@ -1,9 +1,10 @@
 import { firebase, emailAuthProvider } from '../firebase/firebase'
 import React from 'react'
 
-export const logIn = (uid) => ({
+export const logIn = (uid, displayName) => ({
   type: 'LOGIN',
-  uid
+  uid,
+  displayName
 })
 
 export const startLogin = (email, password) => {

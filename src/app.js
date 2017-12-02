@@ -35,7 +35,7 @@ firebase.auth().onAuthStateChanged( (user) => {
     store.dispatch(startSetSurveys()).then( () => {
       //Don't know why I can't dispatch logIn in the actions
       //Users cannot go anywhere without this line
-      store.dispatch(logIn(user.uid))
+      store.dispatch(logIn(user.uid, user.displayName))
       renderApp();
       if (history.location.pathname === '/') {
         history.push('/dashboard')

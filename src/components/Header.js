@@ -10,6 +10,7 @@ const Header = ({startLogOut, auth}) => (
     <NavLink to='/dashboard' activeClassName='is-active' exact={true}>Home</NavLink>
     {auth.uid ? <NavLink to='/create' activeClassName='is-active' exact={true}>Create survey</NavLink> : ''}
     {auth.uid ? <NavLink to={`/surveys/${auth.uid}`} activeClassName='is-active' exact={true}>My Surveys</NavLink> : ''}
+    <p>{auth.displayName ? `Logged in as: ${auth.displayName}` : ''}</p>
   </div>
 )
 

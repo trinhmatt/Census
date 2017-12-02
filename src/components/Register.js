@@ -5,10 +5,18 @@ import UserForm from './UserForm'
 const Register = (props) => (
   <div>
     <h1>Register</h1>
-    <UserForm onSubmit={ (user) => {
-      firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
-      .then( () => {
-        props.history.push('/')
+    <UserForm onSubmit={ (formUser) => {
+      firebase.auth().createUserWithEmailAndPassword(formUser.email, formUser.password)
+      .then( (user) => {
+        user.updateProfile({displayName: formUser.username})
+          .then( () => {
+            props.history.push('/redirect')
+          })
+          .catch( (error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage)
+          })
       })
       .catch((error) => {
         // Handle Errors here.
