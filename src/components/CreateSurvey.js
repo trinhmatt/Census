@@ -89,7 +89,7 @@ class CreateSurvey extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className='create-survey'>
         <h1>Create Survey</h1>
         <form onSubmit={this.createSurvey}>
           <input type='text' placeholder='title' value={this.state.title} onChange={this.onTitleChange} />

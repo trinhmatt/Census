@@ -1,18 +1,54 @@
 import React from 'react';
+import { Menu, Button, Dropdown } from 'semantic-ui-react'
 import { startLogOut } from '../actions/auth'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
-const Header = ({startLogOut, auth}) => (
-  <div>
-    <h1>Header</h1>
-    <button onClick={startLogOut}>Log out</button>
-    <NavLink to='/dashboard' activeClassName='is-active' exact={true}>Home</NavLink>
-    {auth.uid ? <NavLink to='/create' activeClassName='is-active' exact={true}>Create survey</NavLink> : ''}
-    {auth.uid ? <NavLink to={`/surveys/${auth.uid}`} activeClassName='is-active' exact={true}>My Surveys</NavLink> : ''}
-    <p>{auth.displayName ? `Logged in as: ${auth.displayName}` : ''}</p>
-  </div>
-)
+
+class Header extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      activeItem: '',
+      auth: props.auth,
+      startLogOut: props.startLogOut,
+      history: props.history
+    }
+  }
+  onHomeClick = (e, {name}) => {
+    this.setState(() => ({activeItem: name}), this.state.history.push('/dashboard'))
+  }
+  onCreateClick = (e, {name}) => {
+    this.setState(() => ({activeItem: name}), this.state.history.push('/create'))
+  }
+  render() {
+    const {activeItem} = this.state
+    return (
+      // <div className='header'>
+        <Menu className='nav-header' color={'teal'} inverted size='massive' stackable compact>
+          <Menu.Item name='Home' active={activeItem === 'home'} onClick={this.onHomeClick}/>
+          <Menu.Item name='Create Survey' active={activeItem === 'create'} onClick={this.onCreateClick}/>
+          <p id='header-brand'>CensUS.</p>
+          <Menu.Menu position='right'>
+            {!this.state.auth.uid ? <Button primary>Sign Up</Button>
+              : <Dropdown item text={this.state.auth.displayName || 'Anonymous'}>
+                  <Dropdown.Menu>
+                    <Dropdown.Item>
+                      <Link to={`/surveys/${this.state.auth.uid}`}>My Surveys</Link>
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                      <Link to='/settings'>Settings</Link>
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={this.state.startLogOut}>Logout</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+            }
+          </Menu.Menu>
+        </Menu>
+    )
+  }
+}
 
 const mapDispatchToProps = (dispatch) => ({
   startLogOut: () => dispatch(startLogOut())
@@ -22,4 +58,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

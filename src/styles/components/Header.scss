@@ -1,0 +1,26 @@
+.nav-header .ui.button {
+  margin: 1em;
+}
+
+.nav-header {
+  width: 100%
+}
+
+.nav-header * {
+  font-size: $m-size;
+}
+
+.ui.inverted.menu .item, .ui.inverted.menu .item>a:not(.ui) {
+  color: black;
+}
+
+.ui.inverted.menu .item {
+  color: white;
+}
+
+#header-brand {
+  margin-left: 55vh;
+  padding-top: 2vh;
+  color: white;
+  font-size: 2rem;;
+}

@@ -23,6 +23,7 @@ class TextFilter extends React.Component {
           placeholder='Search...'
           value={this.state.text}
           onChange={this.onTextChange}
+          id='text-filter'
         />
       </div>
     )

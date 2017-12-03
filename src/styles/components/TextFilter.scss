@@ -1,0 +1,11 @@
+#text-filter {
+  border: 1px solid $teal;
+  padding: 1rem;
+  width: 80%;
+  background: rgba(255,255,255,0.4)
+}
+
+#text-filter:focus {
+  outline: 1px solid $teal;
+  background: white;
+}

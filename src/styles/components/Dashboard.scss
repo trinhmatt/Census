@@ -1,0 +1,18 @@
+.dashboard {
+  width: 70vh;
+  margin: 15vh auto;
+  text-align: center;
+  border-radius: 1rem;
+  background: rgba(0, 181, 173,0.1)
+}
+
+.dashboard-header {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 2vh;
+}
+
+.dashboard h1 {
+  color: $teal;
+}

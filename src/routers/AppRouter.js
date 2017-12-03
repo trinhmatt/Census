@@ -13,6 +13,8 @@ import AllUserSurveys from '../components/AllUserSurveys'
 import CompletedSurvey from '../components/CompletedSurveyPage'
 import SurveyResults from '../components/SurveyResults'
 import { Redirect } from 'react-router-dom'
+import Settings from '../components/SettingsPage'
+
 
 export const history = createHistory();
 
@@ -28,6 +30,7 @@ const AppRouter = () => (
         <PrivateRoute path='/survey/:id/results' component={SurveyResults} />
         <PrivateRoute path='/surveys/:uid' component={AllUserSurveys} />
         <PublicRoute path='/survey/:id/complete' component={CompletedSurvey} />
+        <PrivateRoute path='/settings' component={Settings} />
         <Redirect from='/redirect' to='/dashboard' />
       </Switch>
     </div>

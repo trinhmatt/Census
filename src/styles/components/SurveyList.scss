@@ -1,0 +1,23 @@
+#survey-link {
+  background: rgba(0,0,0,0.4);
+  width: 90%;
+  display: block;
+  margin: 1rem auto;
+  border-radius: 0.5rem;
+  color: white;
+}
+
+#survey-link:hover {
+  text-decoration: none;
+  color: white;
+  font-weight: bolder;
+}
+
+.survey-list {
+  background: rgba(0, 181, 173,0.5);
+  width: 100%;
+  margin: 0 auto;
+  padding: $m-size;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}

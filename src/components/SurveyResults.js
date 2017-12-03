@@ -21,7 +21,7 @@ class SurveyResults extends React.Component {
     return (
       <div>
         <h1>{this.state.survey.title}</h1>
-        <p>Number of responses: {Object.keys(this.state.survey.completedSurveys).length}</p>
+        <p>Number of responses: {this.state.survey.completedSurveys ? Object.keys(this.state.survey.completedSurveys).length : '0'}</p>
         {this.generateResponse()}
       </div>
     )

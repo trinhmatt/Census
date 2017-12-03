@@ -27,7 +27,7 @@ class Login extends React.Component {
     return (
       <div className='login-page'>
         <div id='landing-header'>
-          <h2>CensUS</h2>
+          <h2>CensUS.</h2>
           <p>Participate or record information for a better world.</p>
           <Link className='register-link' to='/register'>Register</Link>
           <UserForm onSubmit={(user) => {
