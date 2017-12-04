@@ -36,7 +36,7 @@ class SurveyQuestion extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div id='survey-mc-question'>
         <p>{this.state.question}</p>
         <form onSubmit={this.onSubmit}>
           {/* Button needed to submit answer data */}
@@ -57,7 +57,6 @@ class SurveyQuestion extends React.Component {
                 </div>
               )
             }
-
           })}
         </form>
       </div>

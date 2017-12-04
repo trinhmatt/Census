@@ -1,0 +1,29 @@
+.survey-page {
+  width: 70%;
+  margin: 10vh auto;
+  text-align: center;
+  background: $teal;
+  border-radius: 1rem;
+}
+
+.survey-page h1 {
+  background: rgba(255,255,255,0.4);
+  color: white;
+  padding: 1rem;
+}
+
+.survey-page button {
+  background-color: white;
+  border: none;
+  outline: none;
+  color: $teal;
+  margin-bottom: 2rem;
+}
+
+.survey-page button:hover {
+  background-color: $off-black;
+  border: none;
+  outline: none;
+  color: white;
+  margin-bottom: 2rem;
+}

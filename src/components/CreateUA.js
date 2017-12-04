@@ -10,7 +10,8 @@ export default class CreateUA extends React.Component {
       error: '',
       disabled: false,
       id: props.id,
-      type: props.type
+      type: props.type,
+      deleteQuestion: props.deleteQuestion
     }
   }
   onQuestionChange = (e) => {
@@ -33,11 +34,16 @@ export default class CreateUA extends React.Component {
       this.setState( () => ({disabled: false}))
     }
   }
+  deleteQuestion = () => {
+    this.state.deleteQuestion(this.state.id)
+  }
   render() {
     return (
-      <div>
+      <div id='UA-question'>
+        <i id='delete-button' className="fa fa-window-close-o" aria-hidden="true" onClick={this.deleteQuestion}></i>
         {this.state.error}
         <form onSubmit={this.onSubmit}>
+          <button disabled={!this.state.question}>{this.state.disabled ? 'Edit' : 'Save'}</button>
           <input
             type='text'
             value={this.state.question}
@@ -45,7 +51,6 @@ export default class CreateUA extends React.Component {
             onChange={this.onQuestionChange}
             disabled={this.state.disabled}
           />
-          <button disabled={!this.state.question}>{this.state.disabled ? 'Edit' : 'Save'}</button>
         </form>
       </div>
     )

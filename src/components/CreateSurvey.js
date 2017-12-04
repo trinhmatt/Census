@@ -11,12 +11,12 @@ class CreateSurvey extends React.Component {
     super(props);
     this.state = {
       title: '',
-      questions: [],
+      questions: [], //Stores the question objects from the children
       dispatch: props.dispatch,
       history: props.history,
       questionType: 'SA',  //Needed in case the user doesn't change the question type
-      typesToRender: [],
-      nQuestions: 0
+      typesToRender: [], //Component renders the entire array on mount
+      nQuestions: 0 //Track the number of questions + individual questions
     }
   }
   onTitleChange = (e) => {
@@ -37,6 +37,31 @@ class CreateSurvey extends React.Component {
     const questionType = e.target.value
     this.setState(() => ({questionType}))
   }
+  deleteQuestion = (questionID) => {
+    this.setState( (prevState) => {
+      //Each question is related to three variables in state
+      const newTypesToRender = this.state.typesToRender.filter((question) => {
+        return question.props.id !== questionID
+      })
+      let newQuestions = this.state.questions.filter((question) => {
+        return question !== this.state.questions[questionID]
+      })
+      //Need to iterate through the remaining questions and correct their IDs
+      //IDs are needed to ensure that the order of the questions is correct
+      newQuestions = newQuestions.map((question) => {
+        if (question.id === 0) {
+          return question
+        } else {
+          return {...question, id: question.id - 1}
+        }
+      })
+      return {
+        typesToRender: newTypesToRender,
+        nQuestions: prevState.nQuestions - 1,
+        questions: newQuestions
+      }
+    })
+  }
   createQuestionForm = (e) => {
     e.preventDefault();
     switch (this.state.questionType) {
@@ -44,7 +69,13 @@ class CreateSurvey extends React.Component {
         return this.setState( (prevState) => ({
           typesToRender: [
             ...prevState.typesToRender,
-            <CreateMC id={this.state.nQuestions} key={uuid()} type={'SA'} onSubmit={this.onQuestionSave}/>
+            <CreateMC
+              id={this.state.nQuestions}
+              key={uuid()}
+              type={'SA'}
+              onSubmit={this.onQuestionSave}
+              deleteQuestion={this.deleteQuestion}
+            />
           ],
           nQuestions: prevState.nQuestions + 1,
           questions: [...prevState.questions, {}]
@@ -53,7 +84,13 @@ class CreateSurvey extends React.Component {
         return this.setState( (prevState) => ({
           typesToRender: [
             ...prevState.typesToRender,
-            <CreateMC id={this.state.nQuestions} key={uuid()} type={'MA'} onSubmit={this.onQuestionSave}/>
+            <CreateMC
+              id={this.state.nQuestions}
+              key={uuid()}
+              type={'MA'}
+              onSubmit={this.onQuestionSave}
+              deleteQuestion={this.deleteQuestion}
+            />
           ],
           nQuestions: prevState.nQuestions + 1,
           questions: [...prevState.questions, {}]
@@ -62,7 +99,13 @@ class CreateSurvey extends React.Component {
         return this.setState( (prevState) => ({
           typesToRender: [
             ...prevState.typesToRender,
-            <CreateUA id={this.state.nQuestions} key={uuid()} type={'UA'} onSubmit={this.onQuestionSave}/>
+            <CreateUA
+              id={this.state.nQuestions}
+              key={uuid()}
+              type={'UA'}
+              onSubmit={this.onQuestionSave}
+              deleteQuestion={this.deleteQuestion}
+            />
           ],
           nQuestions: prevState.nQuestions + 1,
           questions: [...prevState.questions, {}]
@@ -71,7 +114,13 @@ class CreateSurvey extends React.Component {
         return this.setState( (prevState) => ({
           typesToRender: [
             ...prevState.typesToRender,
-            <CreateUA id={this.state.nQuestions} key={uuid()} type={'RA'} onSubmit={this.onQuestionSave}/>
+            <CreateUA
+              id={this.state.nQuestions}
+              key={uuid()}
+              type={'RA'}
+              onSubmit={this.onQuestionSave}
+              deleteQuestion={this.deleteQuestion}
+            />
           ],
           nQuestions: prevState.nQuestions + 1,
           questions: [...prevState.questions, {}]
@@ -91,20 +140,29 @@ class CreateSurvey extends React.Component {
     return (
       <div className='create-survey'>
         <h1>Create Survey</h1>
-        <form onSubmit={this.createSurvey}>
-          <input type='text' placeholder='title' value={this.state.title} onChange={this.onTitleChange} />
-          <button disabled={!this.state.questions}>Create survey</button>
+        <form id='survey-title-form' onSubmit={this.createSurvey}>
+          <div>
+            <input type='text' placeholder='title' value={this.state.title} onChange={this.onTitleChange} />
+          </div>
+          <div>
+            <button
+              disabled={
+                (this.state.questions[0]) ? (!this.state.questions[0].question) : true
+              }>Create survey</button>
+          </div>
         </form>
-        <h3>Create a question</h3>
-        <form onSubmit={this.createQuestionForm}>
-          <select value={this.state.questionType} onChange={this.onTypeSelect}>
-            <option value='SA'>Single answer</option>
-            <option value='MA'>Multiple answers</option>
-            <option value='UA'>User answer</option>
-            <option value='RA'>Range answer</option>
-          </select>
-          <button>Add</button>
-        </form>
+        <div id='create-question-form'>
+          <p>Create a question:</p>
+          <form id='question-select' onSubmit={this.createQuestionForm}>
+            <select value={this.state.questionType} onChange={this.onTypeSelect}>
+              <option value='SA'>Single answer</option>
+              <option value='MA'>Multiple answers</option>
+              <option value='UA'>User answer</option>
+              <option value='RA'>Range answer</option>
+            </select>
+            <button>Add</button>
+          </form>
+        </div>
         {this.state.typesToRender}
       </div>
     )

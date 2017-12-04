@@ -1,0 +1,83 @@
+#UA-question {
+  background: $off-black;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+  -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 1s; /* Firefox < 16 */
+  -ms-animation: fadein 1s; /* Internet Explorer */
+  -o-animation: fadein 1s; /* Opera < 12.1 */
+  animation: fadein 1s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+#UA-question button {
+  min-width: 10rem;
+  text-align: center;
+  float: left
+}
+
+#UA-question:last-child {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  border-bottom: none;
+}
+
+#delete-button {
+  color: white;
+  float: right;
+}
+
+#delete-button:hover {
+  color: #ff2d2d;
+}
+
+#UA-question input {
+  padding: 1rem;
+  width: 60%;
+  background: rgba(255,255,255,0.6);
+  color: white;
+  margin-right: 10rem;
+}
+
+#UA-question input:focus {
+  background: white;
+  color: black;
+  border: none;
+  outline: none;
+}
+
+#UA-question input:disabled {
+  color: gray;
+}
+
+#UA-question form input {
+  margin-left: 1.5rem;
+}

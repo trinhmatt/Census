@@ -28,7 +28,7 @@ class SurveyPage extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className='survey-page'>
         <h1>{this.state.survey.title}</h1>
         {(this.state.auth.uid === this.state.survey.author)
           ?

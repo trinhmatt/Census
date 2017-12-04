@@ -10,7 +10,8 @@ export default class CreateMC extends React.Component {
       error: '',
       disabled: false,
       type: props.type,
-      id: props.id
+      id: props.id,
+      deleteQuestion: props.deleteQuestion
     }
   }
   onQuestionChange = (e) => {
@@ -35,7 +36,7 @@ export default class CreateMC extends React.Component {
       const answerInput = (
         <input
           type='text'
-          placeholder='answer'
+          placeholder={`Answer #${i+1}`}
           key={i}
           id={i}
           value={this.state.answers[i]}
@@ -64,9 +65,13 @@ export default class CreateMC extends React.Component {
       this.setState( () => ({disabled: false}))
     }
   }
+  deleteQuestion = () => {
+    this.state.deleteQuestion(this.state.id)
+  }
   render() {
     return (
-      <div>
+      <div id='MC-question'>
+        <i id='delete-button' className="fa fa-window-close-o" aria-hidden="true" onClick={this.deleteQuestion}></i>
         {this.state.error}
         <form onSubmit={this.onSubmit}>
           <input
