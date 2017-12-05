@@ -1,0 +1,23 @@
+.my-surveys {
+  width: 50%;
+  margin: 10vh auto;
+  text-align: center;
+}
+
+.my-surveys h1 {
+  color: $teal;
+  padding-bottom: 2rem;
+}
+
+.my-surveys-header {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  background: rgba(0, 181, 173,0.1);
+  padding-bottom: 2rem;
+}
+
+.my-surveys-list {
+  background: $teal;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}

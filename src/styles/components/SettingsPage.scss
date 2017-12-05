@@ -1,0 +1,49 @@
+.settings-page {
+  width: 40%;
+  margin: 10vh auto;
+  border-radius: 1rem;
+  background: $off-black;
+  color: white;
+  padding: 2rem;
+  overflow: visible;
+}
+
+.settings-page h1 {
+  text-align: center;
+  color: white;
+  background: $teal;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  margin: -2rem;
+  margin-bottom: 2rem;
+}
+
+.settings-page .change-button {
+  background: white;
+  color: $teal;
+  border: none;
+  margin-left: 2rem;
+}
+
+.settings-page .change-button:hover {
+  background: $teal;
+  color: white;
+  border: none;
+}
+
+.settings-page .delete-account-button {
+  background: white;
+  color: $red;
+  border: none;
+  margin-left: 1rem;
+}
+
+.settings-page .delete-account-button:hover {
+  background: $red;
+  color: white;
+  border: none;
+}
+
+#change-pass-butt {
+  margin-left: 0;
+}

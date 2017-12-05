@@ -1,0 +1,38 @@
+.update-user-form {
+  width: 40%;
+  margin: 10vh auto;
+  text-align: center;
+}
+
+.update-user-form {
+  width: 40%;
+  margin: 10vh auto;
+  text-align: center;
+}
+
+.update-user-form input {
+  border: 1px solid $teal;
+  padding: 1rem;
+  width: 80%;
+  background: rgba(38,38,38,0.2)
+}
+
+.update-user-form input:focus {
+  outline: 1px solid $teal;
+  background: white;
+}
+
+.update-user-form button {
+  margin-top: 0;
+  width: 80%;
+  background: $teal;
+  color: white;
+  border: 1px solid $teal;
+}
+
+.update-user-form button:hover {
+  width: 80%;
+  background: white;
+  color: $teal;
+  border: 1px solid $teal;
+}

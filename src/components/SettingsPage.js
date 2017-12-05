@@ -18,26 +18,26 @@ class Settings extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className='settings-page'>
         <h1>Settings</h1>
         <div>
           <h3>My Account</h3>
           <p>
             Username: {this.state.user.displayName}
-            <button onClick={() => {
+            <button className='change-button' onClick={() => {
               this.state.history.push('/settings/update-display')
             }}>Change</button>
           </p>
           <p>
             Email: {this.state.user.email}
-            <button onClick={() => {
+            <button className='change-button' onClick={() => {
               this.state.history.push('/settings/update-email')
             }}>Change</button>
           </p>
-          <button onClick={() => {
+          <button id='change-pass-butt' className='change-button' onClick={() => {
             this.state.history.push('/settings/change-password')
           }}>Change password</button>
-          <button onClick={() => {
+          <button className='delete-account-button' onClick={() => {
             this.state.history.push('/settings/delete')
           }}>Delete account</button>
         </div>

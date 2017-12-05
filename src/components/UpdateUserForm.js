@@ -81,16 +81,14 @@ class UpdateUserForm extends React.Component {
           }
         })
         .catch( (error) => {
-          console.log(error.message)
           this.setState(() => ({error: 'The current password was incorrect, please try again.'}))
         });
     }
   }
   render() {
     return (
-      <div>
+      <div className='update-user-form'>
         {this.state.error}
-        <p>Update user form</p>
         <form onSubmit={this.submitUpdate}>
           {
             this.state.placeholder === 'New Password' ?
