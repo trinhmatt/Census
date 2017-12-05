@@ -26,12 +26,17 @@ export default class SurveyUAQuestion extends React.Component {
   generateRadioInput = () => {
     let radios = []
     for (let i=1; i<=5; i++) {
-      radios.push((<input
-        type='radio'
-        value={i}
-        onFocus={this.onRadioChange}
-        name='scale'
-      />))
+      radios.push(
+        <div>
+          <input
+            type='radio'
+            value={i}
+            onFocus={this.onRadioChange}
+            name='scale'
+          />
+          <label>{i}</label>
+        </div>
+      )
     }
     return radios
   }
@@ -42,7 +47,8 @@ export default class SurveyUAQuestion extends React.Component {
     this.setState(() => ({answer: radioAnswer}), this.simulateClick.bind(this,e))
   }
   simulateClick = (e) => {
-    e.target.parentNode.firstChild.click()
+    //Double parentNode because each input is inside a container div
+    e.target.parentNode.parentNode.firstChild.click()
   }
   render() {
     return (

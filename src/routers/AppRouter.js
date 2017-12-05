@@ -14,6 +14,8 @@ import CompletedSurvey from '../components/CompletedSurveyPage'
 import SurveyResults from '../components/SurveyResults'
 import { Redirect } from 'react-router-dom'
 import Settings from '../components/SettingsPage'
+import UpdateUserForm from '../components/UpdateUserForm'
+import DeleteUser from '../components/DeleteUser'
 
 
 export const history = createHistory();
@@ -30,7 +32,11 @@ const AppRouter = () => (
         <PrivateRoute path='/survey/:id/results' component={SurveyResults} />
         <PrivateRoute path='/surveys/:uid' component={AllUserSurveys} />
         <PublicRoute path='/survey/:id/complete' component={CompletedSurvey} />
-        <PrivateRoute path='/settings' component={Settings} />
+        <PrivateRoute path='/settings' component={Settings} exact={true}/>
+        <PrivateRoute path='/settings/update-display' component={UpdateUserForm} />
+        <PrivateRoute path='/settings/update-email' component={UpdateUserForm} />
+        <PrivateRoute path='/settings/change-password' component={UpdateUserForm} />
+        <PrivateRoute path='/settings/delete' component={DeleteUser} />
         <Redirect from='/redirect' to='/dashboard' />
       </Switch>
     </div>

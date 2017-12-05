@@ -1,11 +1,13 @@
 import React from 'react'
 
+
 export default class CreateMC extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       question: '',
       answers: [],
+      inputToRender: [],
       nAnswers: 0,
       error: '',
       disabled: false,
@@ -20,7 +22,6 @@ export default class CreateMC extends React.Component {
     this.setState( () => ({question}) )
   }
   onAnswerChange = (e) => {
-    e.preventDefault();
     const answerID = e.target.id
     const answerVal = e.target.value
     this.setState( (prevState) => {
@@ -31,21 +32,26 @@ export default class CreateMC extends React.Component {
   }
   generateAnswerInput = () => {
     let answers = []
-    let stateAnswers = []
     for (let i=0; i<this.state.nAnswers; i++) {
       const answerInput = (
-        <input
-          type='text'
-          placeholder={`Answer #${i+1}`}
-          key={i}
-          id={i}
-          value={this.state.answers[i]}
-          onChange={this.onAnswerChange}
-          disabled={this.state.disabled}
-        />
+        <div key={i}>
+          <input
+            type='text'
+            placeholder={`Answer #${i+1}`}
+            id={i}
+            value={this.state.answers[i]}
+            onChange={this.onAnswerChange}
+            disabled={this.state.disabled}
+          />
+          <i
+            id='delete-button'
+            className="fa fa-window-close-o"
+            aria-hidden="true"
+            onClick={this.deleteAnswer}
+          ></i>
+        </div>
       )
       answers.push(answerInput)
-      stateAnswers.push('')
     }
     return answers
   }
@@ -68,6 +74,16 @@ export default class CreateMC extends React.Component {
   deleteQuestion = () => {
     this.state.deleteQuestion(this.state.id)
   }
+  deleteAnswer = (e) => {
+    const deletedAnswer = e.target.parentNode.firstChild.value
+    const newAnswers = this.state.answers.filter( (answer) => {
+      return answer !== deletedAnswer
+    })
+    this.setState((prevState) => ({
+      nAnswers: prevState.nAnswers - 1,
+      answers: newAnswers
+    }))
+  }
   render() {
     return (
       <div id='MC-question'>
@@ -88,12 +104,12 @@ export default class CreateMC extends React.Component {
         <button
           onClick={ () => {
             this.setState( (prevState) => {
-              const answerSetUp = ['']
+              const answerSetUp = ''
               return {
                 nAnswers: prevState.nAnswers + 1,
-                answers: prevState.answers.concat(answerSetUp)
+                answers: [...prevState.answers, answerSetUp]
               }
-            })
+            }, this.generateAnswerInput)
           }}
           disabled={this.state.disabled}
           >
