@@ -57,12 +57,12 @@ export default class CreateMC extends React.Component {
   }
   onSubmit = (e) => {
     e.preventDefault();
-    if (this.state.answers.length === 0) {
-      this.setState(() => ({error: 'Please add at least one answer'}))
+    if (this.state.answers.length === 0 || !this.state.question) {
+      this.setState(() => ({error: 'Please add at least one answer and/or enter a valid question'}))
     } else if (!this.state.disabled){
       this.setState( () => ({error: '', disabled: true}) )
       this.props.onSubmit({
-        question: this.state.question,
+        question: this.state.question.trim(),
         answers: this.state.answers,
         type: this.state.type,
         id: this.state.id
