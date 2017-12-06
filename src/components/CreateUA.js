@@ -42,6 +42,7 @@ export default class CreateUA extends React.Component {
       <div id='UA-question'>
         <i id='delete-button' className="fa fa-window-close-o" aria-hidden="true" onClick={this.deleteQuestion}></i>
         {this.state.error}
+        {this.state.type === 'UA' ? 'User Answer' : 'Ranged Answer'}
         <form onSubmit={this.onSubmit}>
           <button disabled={!this.state.question}>{this.state.disabled ? 'Edit' : 'Save'}</button>
           <input

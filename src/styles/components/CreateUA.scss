@@ -1,6 +1,7 @@
 #UA-question {
   background: $off-black;
   padding: 1.5rem;
+  color: white;
   border-bottom: 1px solid rgba(255,255,255,0.5);
   -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
   -moz-animation: fadein 1s; /* Firefox < 16 */
@@ -65,6 +66,7 @@
   background: rgba(255,255,255,0.6);
   color: white;
   margin-right: 10rem;
+  margin-top: 1rem;
 }
 
 #UA-question input:focus {
