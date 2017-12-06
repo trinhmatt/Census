@@ -13,7 +13,7 @@ class SurveyQuestion extends React.Component {
   simulateClick = (e) => {
     e.target.parentNode.parentNode.firstChild.click()
   }
-  onAnswerSelect = (e) => {
+  onCheckSelect = (e) => {
     e.persist()
     const selectedAnswer = e.target.value;
     if (this.state.selectedAnswers.indexOf(selectedAnswer) > -1) {
@@ -30,6 +30,17 @@ class SurveyQuestion extends React.Component {
       )
     }
   }
+  onRadioSelect = (e) => {
+    const selectedAnswer = e.target.value
+    console.log('fired')
+
+    this.setState(() => {
+      return {selectedAnswers: [selectedAnswer]}
+    })
+  }
+  onCustomInputClick = (e) => {
+    e.target.parentNode.parentNode.firstChild.click()
+  }
   onSubmit = (e) => {
     e.preventDefault();
     this.props.onSubmit(({question: this.state.question, selectedAnswer: this.state.selectedAnswers}))
@@ -44,16 +55,24 @@ class SurveyQuestion extends React.Component {
           {this.state.answers.map( (answer) => {
             if (this.state.type === 'SA') {
               return (
-                <div key={answer}>
-                  <input type='radio' value={answer} name='answer' onFocus={this.onAnswerSelect}/>
-                  <label>{answer}</label>
+                <div id='mc-answer' key={answer}>
+                  <input style={{'display': 'none'}} type='radio' value={answer} name='answer' onClick={this.onRadioSelect}/>
+                  <label>
+                    <span onClick={this.onCustomInputClick} id='unchecked-radio'>
+                      <span id='checked-radio'></span>
+                    </span>  {answer}
+                  </label>
                 </div>
               )
             } else {
               return (
-                <div key={answer}>
-                  <input type='checkbox' value={answer} name='answer' onClick={this.onAnswerSelect}/>
-                  <label>{answer}</label>
+                <div id='mc-answer' key={answer}>
+                  <input style={{'display': 'none'}} type='checkbox' value={answer} name='answer' onClick={this.onCheckSelect}/>
+                  <label>
+                    <span onClick={this.onCustomInputClick} id='unchecked-checkbox'>
+                      <span id='checked-checkbox'></span>
+                    </span>  {answer}
+                  </label>
                 </div>
               )
             }

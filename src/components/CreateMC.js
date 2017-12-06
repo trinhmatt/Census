@@ -89,6 +89,7 @@ export default class CreateMC extends React.Component {
       <div id='MC-question'>
         <i id='delete-button' className="fa fa-window-close-o" aria-hidden="true" onClick={this.deleteQuestion}></i>
         {this.state.error}
+        <span>{this.state.type === 'SA' ? 'Single Answer' : 'Multiple Answers'}</span>
         <form onSubmit={this.onSubmit}>
           <input
             type='text'

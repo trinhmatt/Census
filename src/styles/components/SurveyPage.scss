@@ -21,9 +21,8 @@
 }
 
 .survey-page button:hover {
-  background-color: $off-black;
-  border: none;
-  outline: none;
+  background-color: $teal;
+  box-shadow: 0 0 0.5pt 0.5pt white;
   color: white;
   margin-bottom: 2rem;
 }

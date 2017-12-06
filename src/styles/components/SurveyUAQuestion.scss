@@ -5,3 +5,38 @@
   margin-left: 2rem;
   color: white;
 }
+
+#survey-ua-question textarea {
+  border: none;
+  border-radius: 0.5rem;
+  background: rgba(255,255,255,0.4);
+  color: white;
+}
+
+#survey-ua-question textarea:focus {
+  border: none;
+  border-radius: 0.5rem;
+  background: white;
+  color: $teal;
+  outline: none;
+}
+
+#scale-radio input:not(old) {
+  opacity: 0;
+  width: 2em;
+  margin: 0;
+  padding: 0;
+}
+
+#scale-radio input:not(old) + label{
+  display      : inline-block;
+  margin-left  : -2em;
+}
+
+#scale-radio input:checked + label #checked-radio {
+  opacity: 1;
+}
+
+#scale-radio input:checked + label #checked-checkbox {
+  opacity: 1;
+}

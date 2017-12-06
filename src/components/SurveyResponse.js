@@ -39,7 +39,7 @@ class SurveyResponse extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className='survey-response'>
         <h4>Survey response</h4>
         <table>
           <tr>

@@ -22,19 +22,10 @@ class SurveyPage extends React.Component {
     this.state.dispatch(startSubmitSurvey(completedSurvey, this.state.survey.id))
     this.state.history.push(`/survey/${this.state.survey.id}/complete`)
   }
-  deleteSurvey = () => {
-    this.state.dispatch(startDeleteSurvey(this.state.survey.id))
-    this.state.history.push('/dashboard')
-  }
   render() {
     return (
       <div className='survey-page'>
         <h1>{this.state.survey.title}</h1>
-        {(this.state.auth.uid === this.state.survey.author)
-          ?
-          <button onClick={this.deleteSurvey}>Delete survey</button>
-          : ''
-        }
         {this.state.survey.questions.map( (question) => {
           if (question.type === 'SA' || question.type === 'MA') {
             return (

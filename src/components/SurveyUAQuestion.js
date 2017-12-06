@@ -19,6 +19,9 @@ export default class SurveyUAQuestion extends React.Component {
   simulateClick = (e) => {
     e.target.parentNode.firstChild.click()
   }
+  onCustomInputClick = (e) => {
+    e.target.parentNode.parentNode.firstChild.click()
+  }
   onSubmit = (e) => {
     e.preventDefault();
     this.props.onSubmit(({question: this.state.question, answer: this.state.answer}))
@@ -27,14 +30,18 @@ export default class SurveyUAQuestion extends React.Component {
     let radios = []
     for (let i=1; i<=5; i++) {
       radios.push(
-        <div>
+        <div id='scale-radio'>
           <input
             type='radio'
             value={i}
             onFocus={this.onRadioChange}
             name='scale'
           />
-          <label>{i}</label>
+          <label>
+            <span onClick={this.onCustomInputClick} id='unchecked-radio'>
+              <span id='checked-radio'></span>
+            </span>  {i}
+          </label>
         </div>
       )
     }

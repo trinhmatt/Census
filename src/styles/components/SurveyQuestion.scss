@@ -6,6 +6,59 @@
   color: white;
 }
 
-#survey-mc-question input {
-  margin-right: 1rem;
+
+
+#mc-answer input:not(old) + label{
+  display      : inline-block;
+  margin-left  : 1rem;
+  margin-bottom: 1rem;
+}
+
+#mc-answer input:checked + label #checked-radio {
+  opacity: 1;
+}
+
+#unchecked-radio {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 1rem;
+  background: white;
+  display: inline-block;
+  text-align: center;
+  vertical-align: sub;
+}
+
+#checked-radio {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 1rem;
+  background: $teal;
+  display: inline-block;
+  opacity: 0;
+  margin-bottom: 0.75rem;
+}
+
+#unchecked-checkbox {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 0.25rem;
+  background: white;
+  display: inline-block;
+  text-align: center;
+  vertical-align: sub;
+  color: $teal;
+}
+
+#checked-checkbox {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 0.1rem;
+  background: $teal;
+  display: inline-block;
+  opacity: 0;
+  margin-bottom: 0.7rem;
+}
+
+#mc-answer input:checked + label #checked-checkbox {
+  opacity: 1;
 }
