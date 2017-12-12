@@ -22,6 +22,12 @@ class Header extends React.Component {
   onCreateClick = (e, {name}) => {
     this.setState(() => ({activeItem: name}), this.state.history.push('/create'))
   }
+  toSurveys = () => {
+    this.state.history.push(`/surveys/${this.state.auth.uid}`)
+  }
+  toSettings = () => {
+    this.state.history.push('/settings')
+  }
   render() {
     const {activeItem} = this.state
     return (
@@ -34,10 +40,10 @@ class Header extends React.Component {
             {!this.state.auth.uid ? <Button primary>Sign Up</Button>
               : <Dropdown item text={this.state.auth.displayName || 'Anonymous'}>
                   <Dropdown.Menu>
-                    <Dropdown.Item>
+                    <Dropdown.Item onClick={this.toSurveys}>
                       <Link to={`/surveys/${this.state.auth.uid}`}>My Surveys</Link>
                     </Dropdown.Item>
-                    <Dropdown.Item>
+                    <Dropdown.Item onClick={this.toSettings}>
                       <Link to='/settings'>Settings</Link>
                     </Dropdown.Item>
                     <Dropdown.Item onClick={this.state.startLogOut}>Logout</Dropdown.Item>

@@ -32,14 +32,21 @@ class SurveyQuestion extends React.Component {
   }
   onRadioSelect = (e) => {
     const selectedAnswer = e.target.value
-    console.log('fired')
 
     this.setState(() => {
       return {selectedAnswers: [selectedAnswer]}
     })
   }
   onCustomInputClick = (e) => {
-    e.target.parentNode.parentNode.firstChild.click()
+    //Unchecked radio = the child of the label
+    //To simulate a click on the button from the radio button, you need to go up two elements
+    if (e.target.id === 'unchecked-radio' || e.target.id === 'unchecked-checkbox') {
+      e.target.parentNode.parentNode.firstChild.click()
+    } else if (e.target.id === 'checked-radio' || e.target.id === 'checked-checkbox') {
+      e.target.parentNode.parentNode.parentNode.firstChild.click()
+    } else {
+      e.target.parentNode.firstChild.click()
+    }
   }
   onSubmit = (e) => {
     e.preventDefault();
@@ -57,10 +64,13 @@ class SurveyQuestion extends React.Component {
               return (
                 <div id='mc-answer' key={answer}>
                   <input style={{'display': 'none'}} type='radio' value={answer} name='answer' onClick={this.onRadioSelect}/>
-                  <label>
+                  <label onClick={this.onCustomInputClick}>
                     <span onClick={this.onCustomInputClick} id='unchecked-radio'>
-                      <span id='checked-radio'></span>
-                    </span>  {answer}
+                      <div>
+                        <span onClick={this.onCustomInputClick} id='checked-radio'></span>
+                      </div>
+
+                    </span>  <p>{answer}</p>
                   </label>
                 </div>
               )
@@ -68,9 +78,9 @@ class SurveyQuestion extends React.Component {
               return (
                 <div id='mc-answer' key={answer}>
                   <input style={{'display': 'none'}} type='checkbox' value={answer} name='answer' onClick={this.onCheckSelect}/>
-                  <label>
+                  <label onClick={this.onCustomInputClick}>
                     <span onClick={this.onCustomInputClick} id='unchecked-checkbox'>
-                      <span id='checked-checkbox'></span>
+                      <span onClick={this.onCustomInputClick} id='checked-checkbox'></span>
                     </span>  {answer}
                   </label>
                 </div>

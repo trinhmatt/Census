@@ -11,6 +11,9 @@
   border-radius: 0.5rem;
   background: rgba(255,255,255,0.4);
   color: white;
+  max-width: 50rem;
+  max-height: 30rem;
+  padding: 1rem;
 }
 
 #survey-ua-question textarea:focus {
