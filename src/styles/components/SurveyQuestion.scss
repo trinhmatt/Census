@@ -3,12 +3,12 @@
   border-bottom: 1px solid rgba(255,255,255,0.6);
   text-align: left;
   margin-left: 2rem;
+  margin-right: 2rem;
   color: white;
 }
 
 #mc-answer input:not(old) + label{
-  display      : inline-block;
-  margin-left  : 1rem;
+  display: inline-block;
   margin-bottom: 1rem;
 }
 
@@ -21,6 +21,16 @@
 }
 
 #unchecked-radio {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 1rem;
+  background: white;
+  display: block;
+  text-align: center;
+  vertical-align: sub;
+}
+
+#unchecked-radio-sa {
   width: 1.25rem;
   height: 1.25rem;
   border-radius: 1rem;

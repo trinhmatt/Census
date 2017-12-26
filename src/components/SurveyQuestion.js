@@ -65,7 +65,7 @@ class SurveyQuestion extends React.Component {
                 <div id='mc-answer' key={answer}>
                   <input style={{'display': 'none'}} type='radio' value={answer} name='answer' onClick={this.onRadioSelect}/>
                   <label onClick={this.onCustomInputClick}>
-                    <span onClick={this.onCustomInputClick} id='unchecked-radio'>
+                    <span onClick={this.onCustomInputClick} id='unchecked-radio-sa'>
                       <div>
                         <span onClick={this.onCustomInputClick} id='checked-radio'></span>
                       </div>

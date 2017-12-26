@@ -59,7 +59,7 @@ export default class SurveyUAQuestion extends React.Component {
   }
   render() {
     return (
-      <div id='survey-ua-question'>
+      <div id={this.state.type === 'UA' ? 'survey-ua-question' : 'survey-ra-question'}>
         <p>{this.state.question}</p>
         <form onSubmit={this.onSubmit}>
           {/* Button needed to submit answer data */}

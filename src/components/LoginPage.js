@@ -11,6 +11,7 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
+      rememberMe: false,
       startLogin: props.startLogin,
       history: props.history
     }
@@ -28,12 +29,13 @@ class Login extends React.Component {
       <div className='login-page'>
         <div id='landing-header'>
           <h2>CensUS.</h2>
-          <p>Participate or record information, thereby making the world a better place.</p>
+          <p>Get the answers to your questions, thereby making the world a better place.</p>
           <Link className='register-link' to='/register'>Register</Link>
           <UserForm onSubmit={(user) => {
             const email = user.email
             const password = user.password
-            this.state.startLogin(email, password)
+            const rememberMe = user.rememberMe
+            this.state.startLogin(email, password, rememberMe)
           }}/>
         </div>
         <ul className="slideshow">
@@ -49,7 +51,7 @@ class Login extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  startLogin: (email, password) => dispatch(startLogin(email, password))
+  startLogin: (email, password, rememberMe) => dispatch(startLogin(email, password, rememberMe))
 })
 
 export default connect(undefined, mapDispatchToProps)(Login)

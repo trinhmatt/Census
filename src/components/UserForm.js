@@ -9,6 +9,7 @@ class UserForm extends React.Component {
       username: '',
       email: '',
       password: '',
+      rememberMe: false,
       error: '',
       history: props.history
     }
@@ -25,6 +26,13 @@ class UserForm extends React.Component {
     const password = e.target.value
     this.setState({password})
   }
+  onRememberCheck = (e) => {
+    if (!this.state.rememberMe) {
+      this.setState(() => ({rememberMe: true}))
+    } else {
+      this.setState(() => ({rememberMe: false}))
+    }
+  }
   onSubmit = (e) => {
     e.preventDefault();
     if (!this.state.email || !this.state.password) {
@@ -34,13 +42,15 @@ class UserForm extends React.Component {
       this.props.onSubmit({
         username: this.state.username,
         email: this.state.email,
-        password: this.state.password
+        password: this.state.password,
+        rememberMe: this.state.rememberMe
       })
     }
   }
   render() {
     return (
-      <div>
+      <div id='user-form'>
+        {this.state.error}
         <form className='user-form' onSubmit={this.onSubmit}>
           <input
             type='text'
@@ -60,6 +70,15 @@ class UserForm extends React.Component {
             value={this.state.password}
             onChange={this.onPasswordChange}
           />
+          { this.state.history.location.pathname === '/' ? (
+            <div id='remember-me'>
+              <input
+              type='checkbox'
+              value={this.state.rememberMe}
+              onChange={this.onRememberCheck}
+              />
+              <label>Remember Me</label>
+            </div>) : null }
           <button>{this.state.history.location.pathname === '/' ? 'Log In' : 'Register'}</button>
         </form>
       </div>

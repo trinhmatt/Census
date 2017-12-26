@@ -7,13 +7,22 @@ export const logIn = (uid, displayName) => ({
   displayName
 })
 
-export const startLogin = (email, password) => {
+export const startLogin = (email, password, rememberMe) => {
   return (dispatch) => {
-    firebase.auth().signInWithEmailAndPassword(email, password)
-      .catch( (error) => {
-        console.log(error.code, error.message)
-      })
-
+    if (rememberMe) {
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .catch( (error) => {
+          console.log(error.code, error.message)
+        })
+    } else {
+      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+        .then(() => {
+          return firebase.auth().signInWithEmailAndPassword(email, password)
+            .catch( (error) => {
+              console.log(error.code, error.message)
+            })
+        })
+    }
   }
 }
 

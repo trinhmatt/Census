@@ -3,7 +3,18 @@
   border-bottom: 1px solid rgba(255,255,255,0.6);
   text-align: left;
   margin-left: 2rem;
+  margin-right: 2rem;
   color: white;
+}
+
+#survey-ra-question {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.6);
+  text-align: left;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  color: white;
+  padding-bottom: 5rem;
 }
 
 #survey-ua-question textarea {
@@ -13,6 +24,8 @@
   color: white;
   max-width: 50rem;
   max-height: 30rem;
+  min-width: 30rem;
+  min-height: 15rem;
   padding: 1rem;
 }
 
@@ -42,4 +55,8 @@
 
 #scale-radio input:checked + label #checked-checkbox {
   opacity: 1;
+}
+
+div#scale-radio {
+  float: left;
 }

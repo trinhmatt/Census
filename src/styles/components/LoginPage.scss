@@ -21,6 +21,20 @@
   outline: none;
 }
 
+.user-form {
+  color: white;
+}
+
+#user-form {
+  color: white;
+}
+
+#remember-me input {
+  width: auto;
+  margin-right: 1vh;
+  margin-top: 0;
+}
+
 .user-form input:focus::-webkit-input-placeholder { color:transparent; }
 .user-form input:focus:-moz-placeholder { color:transparent; } /* FF 4-18 */
 .user-form input:focus::-moz-placeholder { color:transparent; } /* FF 19+ */
