@@ -37,7 +37,7 @@ const AppRouter = () => (
         <PrivateRoute path='/settings/update-email' component={UpdateUserForm} />
         <PrivateRoute path='/settings/change-password' component={UpdateUserForm} />
         <PrivateRoute path='/settings/delete' component={DeleteUser} />
-        <Redirect from='/redirect' to='/dashboard' />
+        <Redirect from='/redirect' to='/dashboard' exact={true}/>
       </Switch>
     </div>
   </Router>

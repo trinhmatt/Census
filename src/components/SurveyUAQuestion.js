@@ -64,11 +64,13 @@ export default class SurveyUAQuestion extends React.Component {
         <form onSubmit={this.onSubmit}>
           {/* Button needed to submit answer data */}
           <button style={{display:'none'}}>Submit answer</button>
-          {this.state.type === 'UA' ? (<textarea
-            placeholder='Answer here...'
-            value={this.state.answer}
-            onChange={this.onAnswerChange}
-          />) : this.generateRadioInput()}
+          {this.state.type === 'UA' ? (<div>
+            <textarea
+              placeholder='Answer here...'
+              value={this.state.answer}
+              onChange={this.onAnswerChange}
+            />
+          </div>) : this.generateRadioInput()}
         </form>
       </div>
     )

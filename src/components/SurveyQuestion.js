@@ -31,16 +31,17 @@ class SurveyQuestion extends React.Component {
     }
   }
   onRadioSelect = (e) => {
+    e.persist()
     const selectedAnswer = e.target.value
 
     this.setState(() => {
       return {selectedAnswers: [selectedAnswer]}
-    })
+    }, this.simulateClick.bind(this,e))
   }
   onCustomInputClick = (e) => {
     //Unchecked radio = the child of the label
     //To simulate a click on the button from the radio button, you need to go up two elements
-    if (e.target.id === 'unchecked-radio' || e.target.id === 'unchecked-checkbox') {
+    if (e.target.id === 'unchecked-radio-sa' || e.target.id === 'unchecked-checkbox') {
       e.target.parentNode.parentNode.firstChild.click()
     } else if (e.target.id === 'checked-radio' || e.target.id === 'checked-checkbox') {
       e.target.parentNode.parentNode.parentNode.firstChild.click()
