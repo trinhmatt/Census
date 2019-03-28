@@ -147,16 +147,17 @@ class CreateSurvey extends React.Component {
           <div>
             <button
               disabled={
-                (this.state.questions[0]) ? (!this.state.questions[0].question) : true
-              }>Create survey</button>
+                //If there are no questions, disable create button and display message
+                (this.state.questions[0]) ? (!this.state.questions[0].question) : true}>
+                {(this.state.questions[0]) ? ("Create survey") : "You must have at least one question!"}</button>
           </div>
         </form>
         <div id='create-question-form'>
           <p>Create a question:</p>
           <form id='question-select' onSubmit={this.createQuestionForm}>
             <select value={this.state.questionType} onChange={this.onTypeSelect}>
-              <option value='SA'>Single answer</option>
-              <option value='MA'>Multiple answers</option>
+              <option value='SA'>One choice</option>
+              <option value='MA'>Multiple choice</option>
               <option value='UA'>User answer</option>
               <option value='RA'>Range answer</option>
             </select>

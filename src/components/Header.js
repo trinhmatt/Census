@@ -16,11 +16,24 @@ class Header extends React.Component {
       history: props.history
     }
   }
-  onHomeClick = (e, {name}) => {
-    this.setState(() => ({activeItem: name}), this.state.history.push('/dashboard'))
-  }
-  onCreateClick = (e, {name}) => {
-    this.setState(() => ({activeItem: name}), this.state.history.push('/create'))
+  onHeaderClick = (e, {name}) => {
+    //Set active item in header to selected header button
+    //Switch must be in call back since setState is async
+    this.setState(() => ({activeItem: name}), () => {
+
+      //Based on button, push user to related route
+      switch (this.state.activeItem) {
+        case 'Home':
+          this.state.history.push('/dashboard')
+          break;
+        case 'Create Survey':
+          this.state.history.push('/create')
+          break;
+        case 'All Surveys':
+          this.state.history.push('/all')
+          break;
+      }
+    })
   }
   toSurveys = () => {
     this.state.history.push(`/surveys/${this.state.auth.uid}`)
@@ -33,8 +46,9 @@ class Header extends React.Component {
     return (
       // <div className='header'>
         <Menu className='nav-header' color={'teal'} inverted size='massive' stackable compact>
-          <Menu.Item name='Home' active={activeItem === 'home'} onClick={this.onHomeClick}/>
-          <Menu.Item name='Create Survey' active={activeItem === 'create'} onClick={this.onCreateClick}/>
+          <Menu.Item name='Home' active={activeItem === 'home'} onClick={this.onHeaderClick}/>
+          <Menu.Item name='Create Survey' active={activeItem === 'create'} onClick={this.onHeaderClick}/>
+          <Menu.Item name='All Surveys' active={activeItem === 'allSurveys'} onClick={this.onHeaderClick}/>
           <p id='header-brand'>CensUS.</p>
           <Menu.Menu position='right'>
             {!this.state.auth.uid ? <Button primary>Sign Up</Button>

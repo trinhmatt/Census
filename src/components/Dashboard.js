@@ -1,14 +1,11 @@
-import React from 'react';
-import SurveyList from './SurveyList'
-import TextFilter from './TextFilter'
+import React from 'react'
 
 const Dashboard = () => (
-  <div className='dashboard'>
-    <h1>All Surveys</h1>
-    <div className='dashboard-header'>
-      <TextFilter />
+  <div className="infobox">
+    <div>
+      <h2>Instructions</h2>
+      <p>Use the header to participate in surveys or create one of your own!</p>
     </div>
-    <SurveyList onPage={'dashboard'}/>
   </div>
 )
 
